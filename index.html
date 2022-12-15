@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <!--width=device-width sets the width of the viewport to the width of the device. Initial-scale=1 sets the initial zoom level when the user visits the page.-->
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <title>Pokédex app</title>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300&family=Miltonian&family=Miltonian+Tattoo&display=swap">
+    <link rel="stylesheet" type="text/css" href="css/styles.css" >
+  </head>
+  <body>
+    <main>
+      <h1>Pokédex App</h1>
+      <ul class="pokemon-list"></ul>
+      <p class="hidden loading-message">Please wait 
+        <span class="jumping-dots dot-1">.</span>
+        <span class="jumping-dots dot-2">.</span>
+        <span class="jumping-dots dot-3">.</span>
+      </p>
+      <div id="modal-container"></div>
+    </main>
+   
+    <script src="js/scripts.js"></script>
+  </body>
+</html>
