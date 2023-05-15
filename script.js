@@ -3,6 +3,7 @@ const API_ROOT = "https://pokeapi.co/api/v2/"
 
 const pokemonListDiv = document.querySelector('#pokemon-list')
 const chosenPokemonDiv = document.querySelector('#chosen-pokemon')
+const loadingDiv = document.querySelector('#loading-message')
 
 /*
     What is callback?
@@ -28,6 +29,7 @@ const chosenPokemonDiv = document.querySelector('#chosen-pokemon')
 const offset = 0
 
 async function getAllPokemon() {
+    loadingDiv.innerHTML = "Loading..."
     pokemonListDiv.innerHTML = ""
     let response = await fetch(API_ROOT + `pokemon?limit=50&offset=${offset}`)
     let pokemon = await response.json()
@@ -36,6 +38,7 @@ async function getAllPokemon() {
     pokemon.forEach((p, i) => {
         addListItem(p, i)
     })
+    loadingDiv.innerHTML = ""
 }
 
 function addListItem(item, i) {
