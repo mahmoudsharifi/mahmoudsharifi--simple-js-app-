@@ -1,13 +1,77 @@
-.pokemon-button {
-    background-color: #4CAF50;
-    border: none;
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: rgb(222, 245, 253);
+}
+
+header {
+    background-color: #af2020;
     color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 10px;
+    padding: 1rem;
+    font-weight: 900;
+}
+
+main {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+button {
     cursor: pointer;
-    transition-duration: 0.4s;
+}
+
+.pokemon-list_pokemon {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.pokemon-list_pokemon:nth-child(even) {
+    background-color: #e4e4e4;
+}
+
+.pl-number {
+    width: 40px;
+    text-align: center;
+}
+
+.pl-name {
+    width: 150px;
+}
+
+.pl-button {
+    background-color: #ad4343;
+    color: white;
+    padding: .5rem;
+    border: 0;
+}
+
+.pl-button:hover {
+    background-color: #af2020;
+}
+
+#chosen-pokemon {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#chosen-pokemon_name {
+    font-size: larger;
+    font-weight: 700;
+}
+
+#chosen-pokemon_stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .5rem;
+}
+
+#chosen-pokemon_types {
+    
 }
