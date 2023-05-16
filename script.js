@@ -4,6 +4,7 @@ const API_ROOT = "https://pokeapi.co/api/v2/"
 const pokemonListDiv = document.querySelector('#pokemon-list')
 const chosenPokemonDiv = document.querySelector('#chosen-pokemon')
 const loadingDiv = document.querySelector('#loading-message')
+const modal = document.querySelector('#modal')
 
 /*
     What is callback?
@@ -57,12 +58,24 @@ function addListItem(item, i) {
         `
 }
 
+function closeModal() {
+    modal.style.display = "none"
+    allowScrolling()
+}
+
 async function showDetails(url) {
     let response = await fetch(url)
     let pokemon = await response.json()
     console.log(pokemon);
     chosenPokemonDiv.innerHTML = `
-        <img src="${pokemon.sprites.front_default}">
+        <button onclick="closeModal()" id="close-btn">
+            X
+        </button>
+
+        <div id="chosen-pokemon_image">
+            <img src="${pokemon.sprites.front_default}" />
+        </div>
+
         <div>
             <div id="chosen-pokemon_name">
                 #${pokemon.id} - ${pokemon.name}
@@ -88,6 +101,30 @@ async function showDetails(url) {
             </div>
         `
     })
+
+    modal.style.top = window.scrollY + 'px'
+    preventScrolling()
+    modal.style.display = "block"
 }
+
+function preventScrolling() {
+    document.body.classList.add('prevent-scroll')
+}
+
+function allowScrolling() {
+    document.body.classList.remove('prevent-scroll')
+}
+
+document.addEventListener('keyup', e => {
+    if (e.key === "Escape") {
+        closeModal()
+    }
+})
+
+modal.addEventListener('click', e => {
+    if (e.target === e.currentTarget) {
+        closeModal()
+    }
+})
 
 getAllPokemon()

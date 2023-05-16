@@ -2,14 +2,19 @@
     box-sizing: border-box;
 }
 
+:root {
+    --bg: #d5f4ff;
+    --red: #af2020;
+}
+
 body {
     margin: 0;
     font-family: sans-serif;
-    background-color: rgb(222, 245, 253);
+    background-color: var(--bg);
 }
 
 header {
-    background-color: #af2020;
+    background-color: var(--red);
     color: white;
     padding: 1rem;
     font-weight: 900;
@@ -19,6 +24,7 @@ main {
     display: flex;
     gap: 2rem;
     padding: 1rem;
+    justify-content: center;
 }
 
 button {
@@ -52,13 +58,43 @@ button {
 }
 
 .pl-button:hover {
-    background-color: #af2020;
+    background-color: var(--red);
+}
+
+#modal {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(0,0,0,0.5);
 }
 
 #chosen-pokemon {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+    background-color: var(--bg);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 3px solid var(--red);
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#close-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    background: none;
+    border: 1px solid var(--red);
+    color: var(--red);
+
+    font-size: 18px;
 }
 
 #chosen-pokemon_name {
@@ -72,6 +108,15 @@ button {
     gap: .5rem;
 }
 
+#chosen-pokemon_image {
+    text-align: center;
+}
+
 #chosen-pokemon_types {
     
+}
+
+.prevent-scroll {
+    height: 100vh;
+    overflow: hidden;
 }
