@@ -1,2 +1,3 @@
-# mahmoudsharifi--simple-js-app-
-pokedex app project
+# Pokemon database
+
+A database of information about pokemon
