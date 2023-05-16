@@ -34,7 +34,6 @@ button {
 .pokemon-list_pokemon {
     display: flex;
     gap: 1rem;
-    margin-bottom: 1rem;
 }
 
 .pokemon-list_pokemon:nth-child(even) {
