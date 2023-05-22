@@ -31,13 +31,26 @@ button {
     cursor: pointer;
 }
 
+#pokemon-list {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 550px) {
+    #pokemon-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 1000px) {
+    #pokemon-list {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
 .pokemon-list_pokemon {
     display: flex;
     gap: 1rem;
-}
-
-.pokemon-list_pokemon:nth-child(even) {
-    background-color: #e4e4e4;
 }
 
 .pl-number {
@@ -109,10 +122,6 @@ button {
 
 #chosen-pokemon_image {
     text-align: center;
-}
-
-#chosen-pokemon_types {
-    
 }
 
 .prevent-scroll {

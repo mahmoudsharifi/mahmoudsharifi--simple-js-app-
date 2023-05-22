@@ -1,50 +1,59 @@
 const API_ROOT = "https://pokeapi.co/api/v2/"
-// "https://pokeapi.co/api/v2/pokemon/"
 
 const pokemonListDiv = document.querySelector('#pokemon-list')
 const chosenPokemonDiv = document.querySelector('#chosen-pokemon')
 const loadingDiv = document.querySelector('#loading-message')
 const modal = document.querySelector('#modal')
-
-/*
-    What is callback?
-        a callback is a function that is passed into another function as an argument
-    What is a higher-order function?
-        a function that takes a callback
-    What are array methods?
-        functions that can be called on arrays
-    Anonymous arrow functions
-        () => {}
-
-    Array.forEach( (arrayElement, loopIndex)=>{} )
-
-    let fruits = ['apple', 'banana']
-
-    fruits.forEach( (fruit, fruitIndex) => {
-        console.log(fruit, fruitIndex)
-    } )
-
-    `${}` <- template literal
-    */
+const searchForm = document.querySelector('#poke-search')
 
 const offset = 0
+
+let allPokemon = []
+let shownPokemon = []
+
+searchForm.addEventListener('submit', searchPokemon)
+
+function searchPokemon(e) {
+    e.preventDefault()
+    const pokemonName = searchForm.name.value
+    if (!pokemonName) return
+
+    let searchResults = allPokemon.filter(pokemon => {
+        return pokemon.name.includes(pokemonName)
+    })
+
+    if (!searchResults.length) return
+
+    shownPokemon = searchResults
+    renderPokemon()
+}
+
+function showAll() {
+    shownPokemon = allPokemon
+    renderPokemon()
+}
 
 async function getAllPokemon() {
     loadingDiv.innerHTML = "Loading..."
     pokemonListDiv.innerHTML = ""
-    let response = await fetch(API_ROOT + `pokemon?limit=50&offset=${offset}`)
+    let response = await fetch(API_ROOT + `pokemon?limit=151&offset=${offset}`)
     let pokemon = await response.json()
-    pokemon = pokemon.results
-    // console.log(pokemon);
-    pokemon.forEach((p, i) => {
+    allPokemon = pokemon.results
+    shownPokemon = pokemon.results
+    renderPokemon()
+    loadingDiv.innerHTML = ""
+}
+
+function renderPokemon() {
+    pokemonListDiv.innerHTML = ""
+    shownPokemon.forEach((p, i) => {
         addListItem(p, i)
     })
-    loadingDiv.innerHTML = ""
 }
 
 function addListItem(item, i) {
     pokemonListDiv.innerHTML += `
-            <li class="list-group-item pokemon-list_pokemon">
+            <div class="list-group-item pokemon-list_pokemon">
                 <div class="pl-number">
                     ${i + 1}
                 </div>
@@ -54,13 +63,8 @@ function addListItem(item, i) {
                 <button class="btn-primary" onclick="showDetails('${item.url}')">
                     Choose
                 </button>
-            </li>
+            </div>
         `
-}
-
-function closeModal() {
-    modal.style.display = "none"
-    // allowScrolling()
 }
 
 async function showDetails(url) {
@@ -97,24 +101,11 @@ function showModal(pokemon) {
     $('#types').html(types.join(', '))
 }
 
-function preventScrolling() {
-    document.body.classList.add('prevent-scroll')
-}
-
-function allowScrolling() {
-    document.body.classList.remove('prevent-scroll')
-}
-
 document.addEventListener('keyup', e => {
     if (e.key === "Escape") {
         closeModal()
     }
 })
 
-// modal.addEventListener('click', e => {
-//     if (e.target === e.currentTarget) {
-//         closeModal()
-//     }
-// })
 
 getAllPokemon()
